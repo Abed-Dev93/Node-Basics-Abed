@@ -51,6 +51,9 @@ function onDataReceived(text) {
   else if(command === 'list'){
     list();
   }
+  else if(command === 'add'){
+    add(argument);
+  }
   else{
     unknownCommand(input);
   }
@@ -67,6 +70,13 @@ function onDataReceived(text) {
 function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
+
+/**
+ * Array of Tasks
+ *
+ * @returns {void}
+ */
+arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
 
 
 /**
@@ -103,14 +113,26 @@ function help(){
 }
 
 /**
- * Lists all the possible commands
+ * Lists all the tasks
  *
  * @returns {void}
  */
 function list(){
-  arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
   for (let i=0; i<arr.length; i++)
     console.log(i+1 + "- " + arr[i])
+}
+
+/**
+ * Adds tasks to the list
+ *
+ * @returns {void}
+ */
+function add(text){
+  if (text === "" || text === " ")
+    console.log('Error!')
+  else
+    arr.push(text.toUpperCase())
+  console.log(arr)
 }
 
 // The following line starts the application
