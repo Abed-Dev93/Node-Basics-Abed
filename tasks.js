@@ -48,6 +48,9 @@ function onDataReceived(text) {
   else if(command === 'help'){
     help();
   }
+  else if(command === 'list'){
+    list();
+  }
   else{
     unknownCommand(input);
   }
@@ -97,6 +100,17 @@ function quit(){
  */
 function help(){
   console.log('hello\n quit\n exit\n help\n hello [name]\n')
+}
+
+/**
+ * Lists all the possible commands
+ *
+ * @returns {void}
+ */
+function list(){
+  arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
+  for (let i=0; i<arr.length; i++)
+    console.log(i+1 + "- " + arr[i])
 }
 
 // The following line starts the application
