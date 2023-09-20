@@ -112,7 +112,7 @@ function quit(){
  * @returns {void}
  */
 function help(){
-  console.log('hello\n quit\n exit\n help\n hello [name]\n')
+  console.log('hello\n quit\n exit\n help\n hello [name]\n list\n add [anything]\n remove\n remove [index]\n')
 }
 
 /**
