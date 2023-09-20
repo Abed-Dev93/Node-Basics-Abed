@@ -144,10 +144,14 @@ function add(text){
  * @returns {void}
  */
 function remove(index){
-  if (index === undefined)
-    arr.pop()
-  else
-    arr.splice(index - 1, 1)
+  for (let i=0; i<arr.length; i++) {
+    if (index === undefined)
+      arr.pop()
+    else if (index-1 !== i)
+      console.log(index + " does not exist!")
+    else
+      arr.splice(index - 1, 1)
+  }
   console.log(arr)
 }
 
