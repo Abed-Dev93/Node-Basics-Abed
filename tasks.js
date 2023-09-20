@@ -67,7 +67,7 @@ function unknownCommand(c){
 
 
 /**
- * Says hello
+ * Says hello alone or with an additional word
  *
  * @returns {void}
  */
@@ -96,7 +96,7 @@ function quit(){
  * @returns {void}
  */
 function help(){
-  console.log('hello\n quit\n exit\n help\n')
+  console.log('hello\n quit\n exit\n help\n hello [name]\n')
 }
 
 // The following line starts the application
