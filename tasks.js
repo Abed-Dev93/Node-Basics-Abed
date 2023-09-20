@@ -54,6 +54,9 @@ function onDataReceived(text) {
   else if(command === 'add'){
     add(argument);
   }
+  else if(command === 'remove'){
+    remove(argument);
+  }
   else{
     unknownCommand(input);
   }
@@ -132,6 +135,19 @@ function add(text){
     console.log('Error!')
   else
     arr.push(text.toUpperCase())
+  console.log(arr)
+}
+
+/**
+ * Remove tasks from the list
+ *
+ * @returns {void}
+ */
+function remove(index){
+  if (index === undefined)
+    arr.pop()
+  else
+    arr.splice(index - 1, 1)
   console.log(arr)
 }
 
