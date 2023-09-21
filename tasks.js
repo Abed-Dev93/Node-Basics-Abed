@@ -49,14 +49,7 @@ function onDataReceived(text) {
     help();
   }
   else if (command === 'list') {
-    let done
-    for (let i = 0; i < arr.length; i++) {
-      if (Number(argument) === i + 1)
-        done = true
-      else
-        done = false
-    }
-    list(done)
+    list()
   }
   else if (command === 'add') {
     add(argument);
@@ -66,6 +59,9 @@ function onDataReceived(text) {
   }
   else if (command === 'edit') {
     edit(argument);
+  }
+  else if (command === 'check') {
+    check(argument);
   }
   else {
     unknownCommand(input);
@@ -131,9 +127,9 @@ let arr = ["say Hello", "say hello to someone or anything", "type help to check 
  *
  * @returns {void}
  */
-function list(checked) {
+function list(check) {
   for (let i = 0; i < arr.length; i++) {
-    if (!checked)
+    if (!check())
       console.log('[] ' + (i + 1) + "- " + arr[i])
     else
       console.log('[✓] ' + (i + 1) + "- " + arr[i])
@@ -188,6 +184,34 @@ function edit(text) {
   list()
 }
 
+/**
+ * Check the tasks
+ *
+ * @returns {void}
+ */
+function check(index){
+  let done
+  if (!index)
+    return 'Error!'
+  else {
+    for (let i=0; i<arr.length; i++) {
+      if (Number(index) === i + 1)
+        done = true
+      else
+        done = false
+    }
+ }
+ return done
+}
+
+/**
+ * Uncheck the tasks
+ *
+ * @returns {void}
+ */
+function uncheck(){
+  return !check(index)
+}
 
 // The following line starts the application
 startApp("Abdulrahman Ghassa")
