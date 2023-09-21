@@ -117,7 +117,7 @@ function quit() {
  * @returns {void}
  */
 function help() {
-  console.log('hello\n quit\n exit\n help\n hello [name]\n list\n add [anything]\n remove\n remove [index]\n')
+  console.log('hello\n quit\n exit\n help\n hello [name]\n list\n add [anything]\n remove\n remove [index]\n check\n check [index]\n uncheck\n uncheck [index]\n')
 }
 
 let arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
