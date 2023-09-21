@@ -9,7 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-function startApp(name){
+function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
@@ -42,25 +42,32 @@ function onDataReceived(text) {
   if (command === 'quit' || command === 'exit') {
     quit();
   }
-  else if(command === 'hello'){
+  else if (command === 'hello') {
     hello(argument);
   }
-  else if(command === 'help'){
+  else if (command === 'help') {
     help();
   }
-  else if(command === 'list'){
-    list();
+  else if (command === 'list') {
+    let done
+    for (let i = 0; i < arr.length; i++) {
+      if (Number(argument) === i + 1)
+        done = true
+      else
+        done = false
+    }
+    list(done)
   }
-  else if(command === 'add'){
+  else if (command === 'add') {
     add(argument);
   }
-  else if(command === 'remove'){
+  else if (command === 'remove') {
     remove(argument);
   }
-  else if(command === 'edit'){
+  else if (command === 'edit') {
     edit(argument);
   }
-  else{
+  else {
     unknownCommand(input);
   }
 }
@@ -73,8 +80,8 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
-function unknownCommand(c){
-  console.log('unknown command: "'+c.trim()+'"')
+function unknownCommand(c) {
+  console.log('unknown command: "' + c.trim() + '"')
 }
 
 /**
@@ -103,7 +110,7 @@ function hello(name) {
  *
  * @returns {void}
  */
-function quit(){
+function quit() {
   console.log('Quitting now, goodbye!')
   process.exit();
 }
@@ -113,7 +120,7 @@ function quit(){
  *
  * @returns {void}
  */
-function help(){
+function help() {
   console.log('hello\n quit\n exit\n help\n hello [name]\n list\n add [anything]\n remove\n remove [index]\n')
 }
 
@@ -124,9 +131,13 @@ let arr = ["say Hello", "say hello to someone or anything", "type help to check 
  *
  * @returns {void}
  */
-function list(){
-  for (let i=0; i<arr.length; i++)
-    console.log(i+1 + "- " + arr[i])
+function list(checked) {
+  for (let i = 0; i < arr.length; i++) {
+    if (!checked)
+      console.log('[] ' + (i + 1) + "- " + arr[i])
+    else
+      console.log('[✓] ' + (i + 1) + "- " + arr[i])
+  }
 }
 
 /**
@@ -134,7 +145,7 @@ function list(){
  *
  * @returns {void}
  */
-function add(text){
+function add(text) {
   if (text === "" || text === " ")
     console.log('Error!')
   else
@@ -147,11 +158,11 @@ function add(text){
  *
  * @returns {void}
  */
-function remove(index){
-  for (let i=0; i<arr.length; i++) {
+function remove(index) {
+  for (let i = 0; i < arr.length; i++) {
     if (index === undefined)
       arr.pop()
-    else if (index-1 !== i)
+    else if (index - 1 !== i)
       console.log(index + " does not exist!")
     else
       arr.splice(index - 1, 1)
@@ -164,18 +175,19 @@ function remove(index){
  *
  * @returns {void}
  */
-function edit(text){
+function edit(text) {
   array = text.split(' ')
-  for (let i=0; i<arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (text === undefined)
       console.log('Error!')
-    else if (Number(array[i]) === i+1)
+    else if (Number(array[i]) === i + 1)
       arr[i].replace(arr[i], text)
     else
-      arr[i].replace(arr[arr.length-1], text)
+      arr[i].replace(arr[arr.length - 1], text)
   }
   list()
 }
+
 
 // The following line starts the application
 startApp("Abdulrahman Ghassa")
