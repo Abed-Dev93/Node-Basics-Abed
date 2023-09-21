@@ -13,8 +13,31 @@ function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
+  process.on('exit', () => {saveDataToFile('database.json', tasks)})
+  process.on('load', () => {loadDataFromFile('database.json')})
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
+}
+
+function saveDataToFile(fileName, data) {
+  try {
+    const jsonData = JSON.stringify(data, null, 2);
+    fs.writeFileSync(fileName, jsonData);
+    console.log(`Data saved to ${fileName}`);
+  } catch (err) {
+    console.error(`Error saving data to ${fileName}: ${err}`);
+  }
+}
+
+
+function loadDataFromFile(fileName) {
+  try {
+    const jsonData = fs.readFileSync(fileName, 'utf8');
+    tasks = JSON.parse(jsonData);
+    console.log(`Data loaded from ${fileName}`);
+  } catch (err) {
+    console.error(`Error loading data from ${fileName}: ${err}`);
+  }
 }
 
 
@@ -62,6 +85,9 @@ function onDataReceived(text) {
   }
   else if (command === 'check') {
     check(argument);
+  }
+  else if (command === 'uncheck') {
+    uncheck(argument);
   }
   else {
     unknownCommand(input);
@@ -120,7 +146,8 @@ function help() {
   console.log('hello\n quit\n exit\n help\n hello [name]\n list\n add [anything]\n remove\n remove [index]\n check\n check [index]\n uncheck\n uncheck [index]\n')
 }
 
-let arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
+const fs = require('fs')
+const arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
 
 /**
  * Lists all the tasks
@@ -209,9 +236,11 @@ function check(index){
  *
  * @returns {void}
  */
-function uncheck(){
+function uncheck(index){
   return !check(index)
 }
+
+
 
 // The following line starts the application
 startApp("Abdulrahman Ghassa")
