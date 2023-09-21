@@ -57,6 +57,9 @@ function onDataReceived(text) {
   else if(command === 'remove'){
     remove(argument);
   }
+  else if(command === 'edit'){
+    edit(argument);
+  }
   else{
     unknownCommand(input);
   }
@@ -79,7 +82,6 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
 
 
 /**
@@ -114,6 +116,8 @@ function quit(){
 function help(){
   console.log('hello\n quit\n exit\n help\n hello [name]\n list\n add [anything]\n remove\n remove [index]\n')
 }
+
+let arr = ["say Hello", "say hello to someone or anything", "type help to check out the commands", "type exit or quit to get out of tasks"]
 
 /**
  * Lists all the tasks
@@ -153,6 +157,24 @@ function remove(index){
       arr.splice(index - 1, 1)
   }
   console.log(arr)
+}
+
+/**
+ * Edit the tasks
+ *
+ * @returns {void}
+ */
+function edit(text){
+  array = text.split(' ')
+  for (let i=0; i<arr.length; i++) {
+    if (text === undefined)
+      console.log('Error!')
+    else if (Number(array[i]) === i+1)
+      arr[i].replace(arr[i], text)
+    else
+      arr[i].replace(arr[arr.length-1], text)
+  }
+  list()
 }
 
 // The following line starts the application
